@@ -1,0 +1,224 @@
+" 设置leader键
+let mapleader = "\<space>"
+" open hightlight"
+syntax on
+"设置搜索高亮"
+set hlsearch
+set incsearch
+"设置忽略大小写搜索，默认不开启"
+set ignorecase
+set smartcase
+"忽略swapfile文件"
+set noswapfile
+"改键"
+noremap ; :
+map s <nop>
+map S :w<CR>
+map Q :q<CR>
+map R :source $MYVIMRC<CR>
+"打开行号"
+set number
+set relativenumber
+set wrap
+set cursorline
+set wildmenu
+set showcmd
+set encoding=UTF-8
+set mouse=a
+"将缩进设置为空格
+let &t_ut=''
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+"渲染tab和空格
+set listchars=tab:▸\ ,trail:▫
+"开启退格换行
+set backspace=indent,eol,start
+"开启代码折叠
+set foldmethod=indent
+set foldlevel=99
+"设置自动缩进
+set autoindent
+"复制粘贴到剪贴板
+vnoremap <leader>y "+y
+nmap <leader>p "+p
+"undotree
+map <F5> :UndotreeToggle<CR>
+"NERDTreeToggle
+map ff :NERDTreeToggle<CR> 
+
+
+"ariline
+set ambiwidth=double                    " 设置为双字宽显示，否则无法完整显示如:☆
+let g:airline_theme='bubblegum'		"Airline主题
+let g:airline_powerline_fonts = 1
+" 开启tabline
+let g:airline#extensions#tabline#enabled = 1      "tabline中当前buffer两端的分隔字符
+let g:airline#extensions#tabline#left_sep = ' '   "tabline中未激活buffer两端的分隔字符
+let g:airline#extensions#tabline#left_alt_sep = '|'      "tabline中buffer显示编号
+let g:airline#extensions#tabline#buffer_nr_show = 1      
+" 映射切换buffer的键位
+nnoremap [b :bp<CR>
+nnoremap ]b :bn<CR>
+
+"设置字体
+set guifont=Powerline_Consolas:h12:cANSI:qDRAFT
+
+"多语言查错ALE
+"始终开启标志列
+let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 0
+"自定义error和warning图标
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '🔰'
+"在vim自带的状态栏中整合ale
+let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK']
+"显示Linter名称,出错或警告等相关信息
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+"普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
+nmap sp <Plug>(ale_previous_wrap)
+nmap sn <Plug>(ale_next_wrap)
+"<Leader>s触发/关闭语法检查
+nmap <leader>s :ALEToggle<CR>
+"<Leader>d查看错误或警告的详细信息
+nmap <leader>d :ALEDetail<CR>
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}\ %{ALEGetStatusLine()}
+"cpp NOT C++
+let g:ale_linters = {
+\   'c++': ['clang'],
+\   'c': ['gcc'],
+\   'python': ['pylint'],
+\}
+
+"代码自动注释
+map <C-m> <leader>cc
+map <A-m> <leader>cu
+unmap <CR>
+
+"彩虹括号
+" 1. vscode defult 2. author defult 3. vscode show
+"	\	'guifgs': ['#B21212', '#1B9CED','#FFFC00'],
+"	\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+"	\	'guifgs': ['#C186BF', '#268EDB','#F79318'],
+	let g:rainbow_conf = {
+	\	'guifgs': ['#C186BF', '#268EDB','#F79318'],
+	\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+	\	'operators': '_,_',
+	\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+	\	'separately': {
+	\		'*': {},
+	\		'tex': {
+	\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+	\		},
+	\		'lisp': {
+	\			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+	\		},
+	\		'vim': {
+	\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+	\		},
+	\		'html': {
+	\			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+	\		},
+	\		'css': 0,
+	\	}
+	\}
+let g:rainbow_active = 1
+
+"自定义开始菜单
+let g:startify_custom_header = [
+            \ '+------------------------------+',
+            \ '|                              |',
+            \ '|    Still waters run deep!    |',
+            \ '|                              |',
+            \ '+----------------+-------------+',
+            \]
+let g:startify_custom_footer = [
+            \ '+------------------------------+',
+            \ '|     Keep an open mind!       |',
+            \ '+----------------+-------------+',
+            \]
+let g:startify_files_number = 5
+let g:startify_custom_indices = map(range(1,100), 'string(v:val)')
+
+"markdown
+let g:vim_markdown_math = 1
+let g:vmt_auto_update_on_save = 0
+let g:mkdp_markdown_css=''
+let g:mkdp_browser = 'firefox'
+let g:table_mode_corner = '|'
+let g:table_mode_border=0
+let g:table_mode_fillchar=' '
+"表格自动补全
+function! s:isAtStartOfLine(mapping)
+  let text_before_cursor = getline('.')[0 : col('.')-1]
+  let mapping_pattern = '\V' . escape(a:mapping, '\')
+  let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
+  return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
+endfunction
+
+inoreabbrev <expr> <bar><bar>
+          \ <SID>isAtStartOfLine('\|\|') ?
+          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+inoreabbrev <expr> __
+          \ <SID>isAtStartOfLine('__') ?
+          \ '<c-o>:silent! TableModeDisable<cr>' : '__'
+
+"算法Algorithm
+set cindent
+map <F5> :call Run()<CR>
+func! Run()
+	exec "w"
+	exec "!g++ -Wall % -o %<"
+	exec "!./%<"
+endfunc
+
+call plug#begin('~/.vim/plugged')
+Plug 'Raimondi/delimitMate'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'mhinz/vim-startify'
+Plug 'luochen1990/rainbow'
+Plug 'preservim/nerdcommenter'
+Plug 'dense-analysis/ale'
+Plug 'preservim/nerdtree'
+Plug 'mbbill/undotree'
+Plug 'connorholyday/vim-snazzy'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"从这往下都是与markdown相关
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'godlygeek/tabular'
+Plug 'mzlogin/vim-markdown-toc'
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'ferrine/md-img-paste.vim'
+Plug 'chemzqm/wxapp.vim'
+call plug#end()
+"使用snazzy的config"
+color snazzy
+"默认背景透明"
+"let g:SnazzyTransparent = 1
+
+"coc 自动补全配置
+" Use tab for trigger completion with characters ahead and navigate
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
